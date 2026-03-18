@@ -19,12 +19,6 @@ export default function Home() {
             >
               LinkedIn
             </a>
-            <a
-              href="mailto:zayyanc@gmail.com"
-              className="text-sm text-[#ededed] border-b border-[#1f1f1f] pb-px hover:text-white hover:border-white transition-colors"
-            >
-              Email
-            </a>
           </nav>
         </header>
 
@@ -113,39 +107,6 @@ export default function Home() {
                 <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
               </div>
 
-            </div>
-          </section>
-
-          {/* Education */}
-          <section>
-            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Education</h2>
-            <div className="py-5 border-y border-[#1f1f1f]">
-              <h3 className="text-[15px] font-medium text-white">Western Connecticut State University</h3>
-              <span className="text-sm text-[#888]">Bachelor of Arts – Communication</span>
-            </div>
-          </section>
-
-          {/* Skills */}
-          <section>
-            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Skills &amp; Certifications</h2>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "B2B Marketing",
-                "Multi-channel Marketing",
-                "Lifecycle Marketing",
-                "Growth Strategy",
-                "User Activation",
-                "Retention",
-                "Pendo Pro",
-                "Reforge Alumni",
-              ].map((skill) => (
-                <span
-                  key={skill}
-                  className="bg-[#1a1a1a] border border-[#1f1f1f] text-[#ededed] text-[13px] px-3 py-1 rounded"
-                >
-                  {skill}
-                </span>
-              ))}
             </div>
           </section>
 
