@@ -1,65 +1,161 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] font-sans antialiased">
+      <div className="max-w-[680px] mx-auto px-6">
+
+        {/* Header */}
+        <header className="pt-20 pb-14 border-b border-[#1f1f1f]">
+          <h1 className="text-3xl font-semibold tracking-tight text-white">
+            Zayyan Chowdhury
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+          <p className="mt-2 text-[#888]">Growth &amp; Lifecycle Marketing</p>
+          <p className="mt-1 text-sm text-[#888]">New York, NY</p>
+          <nav className="mt-5 flex gap-4">
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://www.linkedin.com/in/zayyan-chowdhury-82800251/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#ededed] border-b border-[#1f1f1f] pb-px hover:text-white hover:border-white transition-colors"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
+              LinkedIn
+            </a>
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="mailto:zayyanc@gmail.com"
+              className="text-sm text-[#ededed] border-b border-[#1f1f1f] pb-px hover:text-white hover:border-white transition-colors"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+              Email
+            </a>
+          </nav>
+        </header>
+
+        <main className="py-12 space-y-12">
+
+          {/* About */}
+          <section>
+            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">About</h2>
+            <p className="text-[#ededed] leading-relaxed">
+              Focused on user activation, expansion, adoption, and retention. I build lifecycle and
+              growth programs that help developer-focused products grow.
+            </p>
+          </section>
+
+          {/* Experience */}
+          <section>
+            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Experience</h2>
+            <div className="divide-y divide-[#1f1f1f]">
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Growth</h3>
+                    <span className="text-sm text-[#888]">Vercel</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">Feb 2026 – Present</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
+              </div>
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Council Member</h3>
+                    <span className="text-sm text-[#888]">GLG</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">Nov 2019 – Present</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">Part-time</p>
+              </div>
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Senior Growth Marketing Manager – Lifecycle</h3>
+                    <span className="text-sm text-[#888]">Cloudflare</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">Apr 2025 – Feb 2026</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">Full-time</p>
+                <p className="mt-2 text-sm text-[#ededed]">
+                  Drove activation, expansion and retention for 11M+ developers globally.
+                </p>
+              </div>
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Growth Marketing Manager – Lifecycle</h3>
+                    <span className="text-sm text-[#888]">Cloudflare</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">May 2023 – Apr 2025</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">Full-time</p>
+              </div>
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Digital Marketing Manager – Retention &amp; Lifecycle</h3>
+                    <span className="text-sm text-[#888]">Elsevier</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">Sep 2020 – May 2023</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
+              </div>
+
+              <div className="py-5">
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h3 className="text-[15px] font-medium text-white">Solutions Marketing Manager – Product Marketing</h3>
+                    <span className="text-sm text-[#888]">Elsevier</span>
+                  </div>
+                  <span className="text-[13px] text-[#888] shrink-0">Aug 2019 – Sep 2020</span>
+                </div>
+                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
+              </div>
+
+            </div>
+          </section>
+
+          {/* Education */}
+          <section>
+            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Education</h2>
+            <div className="py-5 border-y border-[#1f1f1f]">
+              <h3 className="text-[15px] font-medium text-white">Western Connecticut State University</h3>
+              <span className="text-sm text-[#888]">Bachelor of Arts – Communication</span>
+            </div>
+          </section>
+
+          {/* Skills */}
+          <section>
+            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Skills &amp; Certifications</h2>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "B2B Marketing",
+                "Multi-channel Marketing",
+                "Lifecycle Marketing",
+                "Growth Strategy",
+                "User Activation",
+                "Retention",
+                "Pendo Pro",
+                "Reforge Alumni",
+              ].map((skill) => (
+                <span
+                  key={skill}
+                  className="bg-[#1a1a1a] border border-[#1f1f1f] text-[#ededed] text-[13px] px-3 py-1 rounded"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </section>
+
+        </main>
+
+        <footer className="py-8 border-t border-[#1f1f1f]">
+          <p className="text-[13px] text-[#888]">© 2026 Zayyan Chowdhury</p>
+        </footer>
+
+      </div>
     </div>
   );
 }
