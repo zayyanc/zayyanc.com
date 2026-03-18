@@ -289,8 +289,8 @@ export default function ActivationAgentDemo() {
               args: payload.toolTrace.find(t => t.toolName === s.toolName)?.args ?? s.args,
               result: payload.toolTrace.find(t => t.toolName === s.toolName)?.result ?? s.result,
             })));
-            setRunState("done");
             resetTurnstile();
+            setRunState("done");
           }
 
           if (event.type === "error") {
@@ -369,15 +369,17 @@ export default function ActivationAgentDemo() {
         {/* Turnstile + Run button */}
         <div className="mb-8 space-y-3">
           {(runState === "idle" || runState === "error") && (
-            <div
-              className="cf-turnstile"
-              data-sitekey={TURNSTILE_SITE_KEY}
-              data-theme="dark"
-              data-callback="__turnstileCb"
-              data-expired-callback="__turnstileExpired"
-              data-error-callback="__turnstileError"
-              data-unsupported-callback="__turnstileUnsupported"
-            />
+            <div key={`turnstile-${selected}-${runState}`} style={{ colorScheme: "normal" }}>
+              <div
+                className="cf-turnstile"
+                data-sitekey={TURNSTILE_SITE_KEY}
+                data-theme="dark"
+                data-callback="__turnstileCb"
+                data-expired-callback="__turnstileExpired"
+                data-error-callback="__turnstileError"
+                data-unsupported-callback="__turnstileUnsupported"
+              />
+            </div>
           )}
           <button
             onClick={runState === "idle" || runState === "done" || runState === "error" ? run : undefined}
