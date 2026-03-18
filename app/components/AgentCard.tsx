@@ -20,6 +20,7 @@ type Agent = {
   status: "live" | "draft";
   tags: string[];
   repoUrl: string;
+  demoUrl?: string;
   sampleOutput: SampleOutput;
 };
 
@@ -69,6 +70,16 @@ export default function AgentCard({ agent }: { agent: Agent }) {
           >
             Repo ↗
           </a>
+          {agent.demoUrl && (
+            <a
+              href={agent.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[12px] text-[#888] hover:text-white transition-colors"
+            >
+              Demo ↗
+            </a>
+          )}
         </div>
       </div>
 

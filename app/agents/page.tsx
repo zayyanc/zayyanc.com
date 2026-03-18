@@ -9,6 +9,7 @@ const agents = [
     status: "live" as const,
     tags: ["activation", "onboarding"],
     repoUrl: "https://github.com/zayyanc/activation-agent",
+    demoUrl: "https://activation-agent-gamma.vercel.app",
     sampleOutput: {
       trigger: "User created first project after 3-day gap",
       messages: [
