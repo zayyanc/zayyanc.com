@@ -59,9 +59,6 @@ export default function Home() {
                 <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Apr 2025 – Feb 2026</span>
               </div>
               <p className="mt-0.5 text-[13px] text-[#666]">Cloudflare</p>
-              <p className="mt-2 text-[13px] text-[#777] leading-[1.6]">
-                Drove activation, expansion and retention for 11M+ developers globally.
-              </p>
             </div>
 
             <div>
