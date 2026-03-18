@@ -154,40 +154,32 @@ export default function ActivationAgentDemo() {
   const [output, setOutput] = useState<AgentOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
 
-  // Load Turnstile script once
+  // Expose callbacks on window for Turnstile data-attributes
   useEffect(() => {
-    if (document.getElementById("cf-turnstile-script")) return;
-    const script = document.createElement("script");
-    script.id = "cf-turnstile-script";
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  }, []);
+    const w = window as unknown as Record<string, unknown>;
+    w.__turnstileCb = (token: string) => setTurnstileToken(token);
+    w.__turnstileExpired = () => setTurnstileToken(null);
+    w.__turnstileError = () => setTurnstileToken(null);
+    w.__turnstileUnsupported = () => setTurnstileToken(null);
 
-  // Render widget after script loads
-  useEffect(() => {
-    const render = () => {
-      if (!turnstileRef.current || widgetIdRef.current) return;
-      const w = (window as unknown as { turnstile?: { render: (el: HTMLElement, opts: unknown) => string; reset: (id: string) => void } }).turnstile;
-      if (!w) return;
-      widgetIdRef.current = w.render(turnstileRef.current, {
-        sitekey: TURNSTILE_SITE_KEY,
-        theme: "dark",
-        callback: (token: string) => setTurnstileToken(token),
-        "expired-callback": () => setTurnstileToken(null),
-        "error-callback": () => setTurnstileToken(null),
-      });
+    // Load script if not already present
+    if (!document.getElementById("cf-turnstile-script")) {
+      const script = document.createElement("script");
+      script.id = "cf-turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      delete w.__turnstileCb;
+      delete w.__turnstileExpired;
+      delete w.__turnstileError;
+      delete w.__turnstileUnsupported;
     };
-    // Poll until turnstile global is available
-    const interval = setInterval(() => {
-      const w = (window as unknown as { turnstile?: unknown }).turnstile;
-      if (w) { render(); clearInterval(interval); }
-    }, 100);
-    return () => clearInterval(interval);
   }, []);
 
   const resetTurnstile = () => {
@@ -348,7 +340,15 @@ export default function ActivationAgentDemo() {
         {/* Turnstile + Run button */}
         <div className="mb-8 space-y-3">
           {(runState === "idle" || runState === "error") && (
-            <div ref={turnstileRef} />
+            <div
+              className="cf-turnstile"
+              data-sitekey={TURNSTILE_SITE_KEY}
+              data-theme="dark"
+              data-callback="__turnstileCb"
+              data-expired-callback="__turnstileExpired"
+              data-error-callback="__turnstileError"
+              data-unsupported-callback="__turnstileUnsupported"
+            />
           )}
           <button
             onClick={runState === "idle" || runState === "done" || runState === "error" ? run : undefined}
