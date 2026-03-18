@@ -1,10 +1,14 @@
+import Nav from "./components/Nav";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#ededed]" style={{ fontFamily: "var(--font-geist-sans)" }}>
-      <div className="max-w-[620px] mx-auto px-6 py-20">
+      <div className="max-w-[620px] mx-auto px-6">
+
+        <Nav />
 
         {/* Header */}
-        <header className="mb-16">
+        <header className="mb-16 pt-8">
           <h1 className="text-[22px] font-medium tracking-[-0.01em] text-white">
             Zayyan Chowdhury
           </h1>
@@ -33,7 +37,7 @@ export default function Home() {
         <div className="border-t border-[#1a1a1a] mb-12" />
 
         {/* Experience */}
-        <section>
+        <section className="pb-20">
           <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-[#555] mb-8">Experience</p>
           <div className="space-y-8">
 
