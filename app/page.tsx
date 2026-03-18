@@ -1,120 +1,95 @@
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] font-sans antialiased">
-      <div className="max-w-[680px] mx-auto px-6">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed]" style={{ fontFamily: "var(--font-geist-sans)" }}>
+      <div className="max-w-[620px] mx-auto px-6 py-20">
 
         {/* Header */}
-        <header className="pt-20 pb-14 border-b border-[#1f1f1f]">
-          <h1 className="text-3xl font-semibold tracking-tight text-white">
+        <header className="mb-16">
+          <h1 className="text-[22px] font-medium tracking-[-0.01em] text-white">
             Zayyan Chowdhury
           </h1>
-          <p className="mt-2 text-[#888]">Growth &amp; Lifecycle Marketing</p>
-          <p className="mt-1 text-sm text-[#888]">New York, NY</p>
-          <nav className="mt-5 flex gap-4">
+          <p className="mt-1.5 text-[14px] text-[#666]">Growth &amp; Lifecycle Marketing · New York, NY</p>
+          <div className="mt-4">
             <a
               href="https://www.linkedin.com/in/zayyan-chowdhury-82800251/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#ededed] border-b border-[#1f1f1f] pb-px hover:text-white hover:border-white transition-colors"
+              className="text-[13px] text-[#888] hover:text-white transition-colors"
             >
-              LinkedIn
+              LinkedIn ↗
             </a>
-          </nav>
+          </div>
         </header>
 
-        <main className="py-12 space-y-12">
+        {/* About */}
+        <section className="mb-12">
+          <p className="text-[14px] text-[#999] leading-[1.7]">
+            Focused on user activation, expansion, adoption, and retention. I build lifecycle and
+            growth programs that help developer-focused products grow.
+          </p>
+        </section>
 
-          {/* About */}
-          <section>
-            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">About</h2>
-            <p className="text-[#ededed] leading-relaxed">
-              Focused on user activation, expansion, adoption, and retention. I build lifecycle and
-              growth programs that help developer-focused products grow.
-            </p>
-          </section>
+        {/* Divider */}
+        <div className="border-t border-[#1a1a1a] mb-12" />
 
-          {/* Experience */}
-          <section>
-            <h2 className="text-xs font-medium tracking-widest uppercase text-[#888] mb-6">Experience</h2>
-            <div className="divide-y divide-[#1f1f1f]">
+        {/* Experience */}
+        <section>
+          <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-[#555] mb-8">Experience</p>
+          <div className="space-y-8">
 
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Growth</h3>
-                    <span className="text-sm text-[#888]">Vercel</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">Feb 2026 – Present</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Growth</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Feb 2026 – Now</span>
               </div>
-
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Council Member</h3>
-                    <span className="text-sm text-[#888]">GLG</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">Nov 2019 – Present</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">Part-time</p>
-              </div>
-
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Senior Growth Marketing Manager – Lifecycle</h3>
-                    <span className="text-sm text-[#888]">Cloudflare</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">Apr 2025 – Feb 2026</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">Full-time</p>
-                <p className="mt-2 text-sm text-[#ededed]">
-                  Drove activation, expansion and retention for 11M+ developers globally.
-                </p>
-              </div>
-
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Growth Marketing Manager – Lifecycle</h3>
-                    <span className="text-sm text-[#888]">Cloudflare</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">May 2023 – Apr 2025</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">Full-time</p>
-              </div>
-
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Digital Marketing Manager – Retention &amp; Lifecycle</h3>
-                    <span className="text-sm text-[#888]">Elsevier</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">Sep 2020 – May 2023</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
-              </div>
-
-              <div className="py-5">
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-[15px] font-medium text-white">Solutions Marketing Manager – Product Marketing</h3>
-                    <span className="text-sm text-[#888]">Elsevier</span>
-                  </div>
-                  <span className="text-[13px] text-[#888] shrink-0">Aug 2019 – Sep 2020</span>
-                </div>
-                <p className="mt-1 text-[13px] text-[#888]">New York, NY · Full-time</p>
-              </div>
-
+              <p className="mt-0.5 text-[13px] text-[#666]">Vercel · New York, NY</p>
             </div>
-          </section>
 
-        </main>
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Council Member</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Nov 2019 – Now</span>
+              </div>
+              <p className="mt-0.5 text-[13px] text-[#666]">GLG · Part-time</p>
+            </div>
 
-        <footer className="py-8 border-t border-[#1f1f1f]">
-          <p className="text-[13px] text-[#888]">© 2026 Zayyan Chowdhury</p>
-        </footer>
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Senior Growth Marketing Manager, Lifecycle</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Apr 2025 – Feb 2026</span>
+              </div>
+              <p className="mt-0.5 text-[13px] text-[#666]">Cloudflare</p>
+              <p className="mt-2 text-[13px] text-[#777] leading-[1.6]">
+                Drove activation, expansion and retention for 11M+ developers globally.
+              </p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Growth Marketing Manager, Lifecycle</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">May 2023 – Apr 2025</span>
+              </div>
+              <p className="mt-0.5 text-[13px] text-[#666]">Cloudflare</p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Digital Marketing Manager, Retention &amp; Lifecycle</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Sep 2020 – May 2023</span>
+              </div>
+              <p className="mt-0.5 text-[13px] text-[#666]">Elsevier · New York, NY</p>
+            </div>
+
+            <div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-[14px] font-medium text-white">Solutions Marketing Manager, Product Marketing</span>
+                <span className="text-[12px] text-[#555] shrink-0 tabular-nums">Aug 2019 – Sep 2020</span>
+              </div>
+              <p className="mt-0.5 text-[13px] text-[#666]">Elsevier · New York, NY</p>
+            </div>
+
+          </div>
+        </section>
 
       </div>
     </div>
