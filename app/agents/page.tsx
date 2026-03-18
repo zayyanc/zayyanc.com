@@ -11,16 +11,16 @@ const agents = [
     repoUrl: "https://github.com/zayyanc/activation-agent",
     demoUrl: "/agents/activation-agent",
     sampleOutput: {
-      trigger: "User created first project after 3-day gap",
+      trigger: "User created first project but hasn't deployed after 3 days",
       messages: [
         {
           channel: "Email",
-          subject: "You're one step away from your first deployment",
-          body: "Hey — noticed you set up your project but haven't deployed yet. Here's a 2-minute guide to get your first deployment live. Most users who deploy in the first week see 3x higher retention.",
+          subject: "Your project hasn't deployed yet",
+          body: "You set up a project 3 days ago but haven't deployed. Run `vercel` in your project directory and it'll be live in under a minute.",
         },
         {
           channel: "In-app",
-          body: "Your project is ready. Deploy now and see it live in seconds →",
+          body: "Deploy your project — run `vercel` in your terminal to go live.",
         },
       ],
     },
