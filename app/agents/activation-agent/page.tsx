@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Nav from "../../components/Nav";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAACskkmyTD2M7Y1mb";
 
 const EXAMPLE_TRIGGERS = [
   {
@@ -151,12 +153,55 @@ export default function ActivationAgentDemo() {
   const [steps, setSteps] = useState<ToolStep[]>([]);
   const [output, setOutput] = useState<AgentOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  // Load Turnstile script once
+  useEffect(() => {
+    if (document.getElementById("cf-turnstile-script")) return;
+    const script = document.createElement("script");
+    script.id = "cf-turnstile-script";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, []);
+
+  // Render widget after script loads
+  useEffect(() => {
+    const render = () => {
+      if (!turnstileRef.current || widgetIdRef.current) return;
+      const w = (window as unknown as { turnstile?: { render: (el: HTMLElement, opts: unknown) => string; reset: (id: string) => void } }).turnstile;
+      if (!w) return;
+      widgetIdRef.current = w.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: "dark",
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(null),
+        "error-callback": () => setTurnstileToken(null),
+      });
+    };
+    // Poll until turnstile global is available
+    const interval = setInterval(() => {
+      const w = (window as unknown as { turnstile?: unknown }).turnstile;
+      if (w) { render(); clearInterval(interval); }
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  const resetTurnstile = () => {
+    const w = (window as unknown as { turnstile?: { reset: (id: string) => void } }).turnstile;
+    if (w && widgetIdRef.current) w.reset(widgetIdRef.current);
+    setTurnstileToken(null);
+  };
 
   const reset = (newIndex?: number) => {
     setRunState("idle");
     setSteps([]);
     setOutput(null);
     setError(null);
+    resetTurnstile();
     if (newIndex !== undefined) setSelected(newIndex);
   };
 
@@ -181,7 +226,7 @@ export default function ActivationAgentDemo() {
       const res = await fetch("https://activation-agent-gamma.vercel.app/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(EXAMPLE_TRIGGERS[selected]),
+        body: JSON.stringify({ ...EXAMPLE_TRIGGERS[selected], turnstileToken }),
       });
 
       if (!res.ok || !res.body) throw new Error("Request failed");
@@ -236,6 +281,7 @@ export default function ActivationAgentDemo() {
               result: payload.toolTrace.find(t => t.toolName === s.toolName)?.result ?? s.result,
             })));
             setRunState("done");
+            resetTurnstile();
           }
 
           if (event.type === "error") {
@@ -299,14 +345,19 @@ export default function ActivationAgentDemo() {
           </pre>
         </section>
 
-        {/* Run button */}
-        <button
-          onClick={runState === "idle" || runState === "done" || runState === "error" ? run : undefined}
-          disabled={isRunning}
-          className="w-full py-2.5 rounded-md bg-white text-black text-[13px] font-medium hover:bg-[#e0e0e0] transition-colors disabled:opacity-40 disabled:cursor-not-allowed mb-8"
-        >
-          {isRunning ? "Agent running…" : runState === "done" ? "Run again →" : "Run agent →"}
-        </button>
+        {/* Turnstile + Run button */}
+        <div className="mb-8 space-y-3">
+          {(runState === "idle" || runState === "error") && (
+            <div ref={turnstileRef} />
+          )}
+          <button
+            onClick={runState === "idle" || runState === "done" || runState === "error" ? run : undefined}
+            disabled={isRunning || ((runState === "idle" || runState === "error") && !turnstileToken)}
+            className="w-full py-2.5 rounded-md bg-white text-black text-[13px] font-medium hover:bg-[#e0e0e0] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {isRunning ? "Agent running…" : runState === "done" ? "Run again →" : "Run agent →"}
+          </button>
+        </div>
 
         {/* Live steps */}
         {steps.length > 0 && (
