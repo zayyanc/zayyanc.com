@@ -154,6 +154,10 @@ export default function ActivationAgentDemo() {
   const [output, setOutput] = useState<AgentOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [contextJson, setContextJson] = useState(
+    JSON.stringify(EXAMPLE_TRIGGERS[0].userContext, null, 2)
+  );
+  const [jsonError, setJsonError] = useState<string | null>(null);
   const widgetIdRef = useRef<string | null>(null);
 
   // Expose callbacks on window for Turnstile data-attributes
@@ -193,11 +197,24 @@ export default function ActivationAgentDemo() {
     setSteps([]);
     setOutput(null);
     setError(null);
+    setJsonError(null);
     resetTurnstile();
-    if (newIndex !== undefined) setSelected(newIndex);
+    if (newIndex !== undefined) {
+      setSelected(newIndex);
+      setContextJson(JSON.stringify(EXAMPLE_TRIGGERS[newIndex].userContext, null, 2));
+    }
   };
 
   const run = async () => {
+    // Validate JSON before running
+    let parsedContext: Record<string, unknown>;
+    try {
+      parsedContext = JSON.parse(contextJson);
+    } catch {
+      setJsonError("Invalid JSON — fix it before running.");
+      return;
+    }
+    setJsonError(null);
     setRunState("running");
     setSteps([]);
     setOutput(null);
@@ -218,7 +235,7 @@ export default function ActivationAgentDemo() {
       const res = await fetch("https://activation-agent-gamma.vercel.app/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...EXAMPLE_TRIGGERS[selected], turnstileToken }),
+        body: JSON.stringify({ trigger: EXAMPLE_TRIGGERS[selected].trigger, userContext: parsedContext, turnstileToken }),
       });
 
       if (!res.ok || !res.body) throw new Error("Request failed");
@@ -287,7 +304,6 @@ export default function ActivationAgentDemo() {
     }
   };
 
-  const current = EXAMPLE_TRIGGERS[selected];
   const isRunning = runState === "running";
 
   return (
@@ -329,12 +345,25 @@ export default function ActivationAgentDemo() {
           </div>
         </section>
 
-        {/* Context preview */}
+        {/* Context editor */}
         <section className="mb-6">
-          <p className="text-[11px] uppercase tracking-[0.08em] text-[#444] font-medium mb-2">User context</p>
-          <pre className="text-[12px] text-[#555] bg-[#0d0d0d] border border-[#1a1a1a] rounded-md px-4 py-3 overflow-x-auto font-mono">
-            {JSON.stringify(current.userContext, null, 2)}
-          </pre>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[11px] uppercase tracking-[0.08em] text-[#444] font-medium">User context</p>
+            <span className="text-[11px] text-[#333]">editable</span>
+          </div>
+          <textarea
+            value={contextJson}
+            onChange={(e) => { setContextJson(e.target.value); setJsonError(null); }}
+            disabled={isRunning}
+            spellCheck={false}
+            rows={Math.max(4, contextJson.split("\n").length)}
+            className={`w-full text-[12px] font-mono bg-[#0d0d0d] border rounded-md px-4 py-3 resize-none outline-none transition-colors leading-relaxed disabled:opacity-50 ${
+              jsonError ? "border-red-500/50 text-red-400" : "border-[#1a1a1a] text-[#888] focus:border-[#333] focus:text-[#aaa]"
+            }`}
+          />
+          {jsonError && (
+            <p className="text-[11px] text-red-400 mt-1.5">{jsonError}</p>
+          )}
         </section>
 
         {/* Turnstile + Run button */}
