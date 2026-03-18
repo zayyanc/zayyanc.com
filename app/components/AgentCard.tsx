@@ -62,6 +62,15 @@ export default function AgentCard({ agent }: { agent: Agent }) {
           >
             {expanded ? "Hide sample ↑" : "View sample output ↓"}
           </button>
+          {agent.demoUrl && (
+            <a
+              href={agent.demoUrl}
+              {...(agent.demoUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="text-[12px] text-[#888] hover:text-white transition-colors"
+            >
+              {agent.demoUrl.startsWith("http") ? "Demo ↗" : "Demo ↓"}
+            </a>
+          )}
           <a
             href={agent.repoUrl}
             target="_blank"
@@ -70,15 +79,6 @@ export default function AgentCard({ agent }: { agent: Agent }) {
           >
             Repo ↗
           </a>
-          {agent.demoUrl && (
-            <a
-              href={agent.demoUrl}
-              {...(agent.demoUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="text-[12px] text-[#888] hover:text-white transition-colors"
-            >
-              Demo ↗
-            </a>
-          )}
         </div>
       </div>
 
