@@ -73,8 +73,7 @@ export default function AgentCard({ agent }: { agent: Agent }) {
           {agent.demoUrl && (
             <a
               href={agent.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(agent.demoUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="text-[12px] text-[#888] hover:text-white transition-colors"
             >
               Demo ↗
